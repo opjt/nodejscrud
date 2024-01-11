@@ -1,0 +1,55 @@
+<%-include('header.ejs') %>
+        <br>
+
+        <form action="/edit" method="post">
+            <div class="container">
+                <input type="hidden" name="id" value="<%=data._id%>">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">제목</label>
+                    <input type="text" class="form-control" id="title" name="title" value="<%=data.title%>" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">내용</label>
+                    <textarea class="form-control" id="body" name="body" rows="10" readonly><%=data.content%></textarea>
+                </div>
+                <div>
+                    <label class="form-label">작성일</label>
+                    <input type="date" class="form-control" name="someDate" value="<%=data.date%>" readonly>
+                </div>
+                <div class="buttonlist">
+                    <a class="btn btn-primary" href="/list">글목록</a>
+                    <button type="button" class="modify btn btn-warning">수정</button>
+                </div>
+                <div class="buttonlist2" style="display:none;">
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                    <a href="/post/<%=data._id%>" class="cancel btn btn-warning">취소</a>
+                </div>
+            </div>
+        </form>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"
+        integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+    <script>
+        
+        $('.modify').click(function(e) {
+            let item =$(this);
+            console.log(item.parent('div').find('.buttonlist2'));
+            item.parent('div').hide();
+            item.parent('div').next('.buttonlist2').show();
+            $('.form-control').attr('readonly',false);
+            
+        });
+        $('.cancel').click(function(e) {
+            let item =$(this);
+            console.log(item.parent('div').find('.buttonlist'));
+            item.parent('div').prev('.buttonlist').show();
+            item.parent('div').hide();
+            $('.form-control').attr('readonly',true);
+            
+            
+        });
+    </script>
+</html>

@@ -1,0 +1,9 @@
+<%-include('header.ejs') %>
+    <br>
+    <h1>HOME</h1>
+    <% if(user) { %>
+        <h3>반갑습니다 <%=user.user%>님</h3>
+
+        <%} %>
+
+<%-include('footer.ejs') %>

@@ -1,0 +1,64 @@
+<%-include('header.ejs') %>
+        <br>
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
+
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">title</th>
+                        <th scope="col">content</th>
+                        <th scope="col">-</th>
+                        <th scope="col">비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i=0; i<data.length; i++){ %>
+                        <tr>
+                            <th scope="col">
+                                <%=i%>
+                            </th>
+                            <th scope="col">
+                                <%= data[i].title %>
+                            </th>
+                            <th scope="col">
+                                <%= data[i].content %>
+                            </th>
+                            <th scope="col">
+                                <%= data[i].date %>
+                            </th>
+                            <th scope="col">
+                                <button class="delete btn btn-danger" data-id ='<%= data[i]._id%>'>삭제</button>
+                                <a class="btn btn-secondary" href="/post/<%=data[i]._id%>">상세보기</button>
+                            </th>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+            <a href="/write" class="btn btn-primary float-end">글쓰기</a>
+        </div>
+
+    </body>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"
+        integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+    <script>
+        
+        $('.delete').click(function(e) {
+            let sid = e.target.dataset.id;
+            let item =$(this);
+            $.ajax({
+                type:'post',
+                url:'/delete',
+                data: {_id:sid}
+            }).done(function(result){
+                item.parent('th').parent('tr').remove();
+            }).fail(function(xhr,textStatus,errorThrown) {
+                console.log('게시물 삭제 실패');
+                console.log(xhr,textStatus,errorThrown);
+            })
+            
+        });
+    </script>
+
+</html>

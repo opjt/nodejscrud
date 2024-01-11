@@ -1,0 +1,29 @@
+<%-include('header.ejs') %>
+
+        <br>
+
+        <form action="/save" method="post">
+            <div class="container">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">제목</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하시오">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">내용</label>
+                    <textarea class="form-control" id="body" name="body" rows="10"></textarea>
+                </div>
+                <div>
+                    <label class="form-label">작성일</label>
+                    <input type="date" class="form-control" name="someDate">
+                </div>
+                <input class="btn btn-primary float-end" type="submit" value="Submit">
+            </div>
+        </form>
+
+        <div class="container mt-3">
+            <form action="/photo" method="POST" enctype="multipart/form-data">
+                <input type="file" name="picture" accept="image/*" class="btn btn-outline-primary">
+                <input type="submit" class="btn btn-outline-primary" value="첨부">
+            </form>
+        </div>
+        <%-include('footer.ejs') %>
